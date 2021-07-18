@@ -5,7 +5,7 @@ import (
 	fiber "github.com/gofiber/fiber/v2"
 )
 
-func DeleteList(c *Ctx, db *database.DB, r DeleteListRessource) error {
+func deleteList(c *Ctx, db *database.DB, r DeleteListRessource) error {
 
 	query := r.DeleteListQuery()
 	if err := c.QueryParser(query); err != nil {

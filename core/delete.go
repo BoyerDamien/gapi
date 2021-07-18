@@ -5,7 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func Delete(c *Ctx, db *database.DB, r DeleteRessource) error {
+func delete(c *Ctx, db *database.DB, r DeleteRessource) error {
 
 	result, err := r.Delete(c, db)
 	if err != nil {

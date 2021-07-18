@@ -5,7 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func Create(c *Ctx, db *database.DB, r CreateRessource) error {
+func create(c *Ctx, db *database.DB, r CreateRessource) error {
 
 	if err := c.BodyParser(r); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err.Error()})

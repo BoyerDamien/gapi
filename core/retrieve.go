@@ -5,7 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func Retrieve(c *Ctx, db *database.DB, r RetrieveRessource) error {
+func retrieve(c *Ctx, db *database.DB, r RetrieveRessource) error {
 
 	result, err := r.Retrieve(c, db)
 	if err != nil {

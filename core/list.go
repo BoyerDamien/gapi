@@ -5,7 +5,7 @@ import (
 	fiber "github.com/gofiber/fiber/v2"
 )
 
-func List(c *Ctx, db *database.DB, r ListRessource) error {
+func list(c *Ctx, db *database.DB, r ListRessource) error {
 
 	query := r.ListQuery()
 	if err := c.QueryParser(query); err != nil {

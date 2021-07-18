@@ -100,41 +100,41 @@ func (s *Router) AddRessources(ressources ...interface{}) {
 		if s.hasMethod(val, "Retrieve") {
 			log.Printf("Add endpoint GET %s", uri)
 			s.Get(fmt.Sprintf("%s/:id", ressourceName), func(c *Ctx) error {
-				return Retrieve(c, s.db, valCopy.(RetrieveRessource))
+				return retrieve(c, s.db, valCopy.(RetrieveRessource))
 			})
 		}
 		if s.hasMethod(val, "Create") {
 			log.Printf("Add endpoint POST %s", uri)
 			s.Post(ressourceName, func(c *Ctx) error {
-				return Create(c, s.db, valCopy.(CreateRessource))
+				return create(c, s.db, valCopy.(CreateRessource))
 			})
 		}
 
 		if s.hasMethod(val, "Delete") {
 			log.Printf("Add endpoint DELETE %s", uri)
 			s.Delete(fmt.Sprintf("%s/:id", ressourceName), func(c *Ctx) error {
-				return Delete(c, s.db, valCopy.(DeleteRessource))
+				return delete(c, s.db, valCopy.(DeleteRessource))
 			})
 		}
 
 		if s.hasMethod(val, "Update") {
 			log.Printf("Add endpoint PUT %s", uri)
 			s.Put(ressourceName, func(c *Ctx) error {
-				return Update(c, s.db, valCopy.(UpdateRessource))
+				return update(c, s.db, valCopy.(UpdateRessource))
 			})
 		}
 
 		if s.hasMethod(val, "List") {
 			log.Printf("Add endpoint GET %ss", uri)
 			s.Get(fmt.Sprintf("%ss", ressourceName), func(c *Ctx) error {
-				return List(c, s.db, valCopy.(ListRessource))
+				return list(c, s.db, valCopy.(ListRessource))
 			})
 		}
 
 		if s.hasMethod(val, "DeleteList") {
 			log.Printf("Add endpoint DELETE %ss", uri)
 			s.Delete(fmt.Sprintf("%ss", ressourceName), func(c *Ctx) error {
-				return DeleteList(c, s.db, valCopy.(DeleteListRessource))
+				return deleteList(c, s.db, valCopy.(DeleteListRessource))
 			})
 		}
 	}
