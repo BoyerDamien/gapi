@@ -124,14 +124,14 @@ func (s *Router) AddRessources(ressources ...interface{}) {
 			})
 		}
 
-		if s.hasMethod(val, "List") {
+		if s.hasMethod(val, "ListQuery") {
 			log.Printf("Add endpoint GET %ss", uri)
 			s.Get(fmt.Sprintf("%ss", ressourceName), func(c *Ctx) error {
 				return list(c, s.db, valCopy.(ListRessource))
 			})
 		}
 
-		if s.hasMethod(val, "DeleteList") {
+		if s.hasMethod(val, "DeleteListQuery") {
 			log.Printf("Add endpoint DELETE %ss", uri)
 			s.Delete(fmt.Sprintf("%ss", ressourceName), func(c *Ctx) error {
 				return deleteList(c, s.db, valCopy.(DeleteListRessource))
