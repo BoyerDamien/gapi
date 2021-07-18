@@ -10,6 +10,7 @@ import (
 func main() {
 
 	app := core.New(sqlite.Open("test.db"), core.Config{})
+	app.StaticFolders("./staticfiles")
 
 	coll := app.Collection("/api/v1")
 	coll.AddRessources(&Tag{})
