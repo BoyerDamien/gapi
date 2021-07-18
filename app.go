@@ -1,4 +1,4 @@
-package core
+package gapi
 
 import (
 	"fmt"
@@ -39,7 +39,7 @@ func (s *App) Collection(endpoint string, handlers ...func(*Ctx) error) Router {
 }
 
 // StaticFolders allows you to specify the locations of you static files:
-//	app := core.New(sqlite.Open("test.db"), core.Config{})
+//	app := gapi.New(sqlite.Open("test.db"), gapi.Config{})
 //	app.StaticFolders("./staticfiles")
 func (s *App) StaticFolders(paths ...string) {
 	for _, path := range paths {
@@ -141,9 +141,9 @@ func (s *Router) AddRessources(ressources ...interface{}) {
 }
 
 // New creates a new Gapi named instance.
-//  app := core.New(sqlite.Open("test.db"), core.Config{})
+//  app := gapi.New(sqlite.Open("test.db"), gapi.Config{})
 // You can pass optional configuration options by passing a Config struct:
-//  app := core.New(sqlite.Open("test.db"), core.Config{
+//  app := gapi.New(sqlite.Open("test.db"), gapi.Config{
 //      Prefork: true,
 //      ServerHeader: "Gapi",
 //  })

@@ -1,4 +1,4 @@
-package core
+package gapi
 
 import "github.com/go-playground/validator"
 
