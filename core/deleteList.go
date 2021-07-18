@@ -1,19 +1,18 @@
-package generics
+package core
 
 import (
-	"github.com/BoyerDamien/gapi/ressource"
+	"github.com/BoyerDamien/gapi/database"
 	fiber "github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
-func DeleteList(c *fiber.Ctx, db *gorm.DB, r ressource.DeleteListRessource) error {
+func DeleteList(c *Ctx, db *database.DB, r DeleteListRessource) error {
 
 	query := r.DeleteListQuery()
 	if err := c.QueryParser(query); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err})
 	}
 
-	if err := ressource.Validate(query); err != nil {
+	if err := Validate(query); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err})
 	}
 

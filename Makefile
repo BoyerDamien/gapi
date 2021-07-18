@@ -15,7 +15,7 @@ install:
 	go mod tidy
 
 run: build
-	./dbsite
+	./gapi
 
 run_doc: doc
 	swagger serve --no-open $(DOC_FILENAME)

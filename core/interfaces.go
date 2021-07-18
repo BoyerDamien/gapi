@@ -1,12 +1,11 @@
-package ressource
+package core
 
 import (
-	"github.com/BoyerDamien/gapi"
 	"github.com/BoyerDamien/gapi/database"
 )
 
 type Query interface {
-	Run(c *gapi.Ctx, db *database.DB) (*database.DB, interface{})
+	Run(c *Ctx, db *database.DB) (*database.DB, interface{})
 }
 
 // List Deletable Ressource
@@ -21,20 +20,20 @@ type ListRessource interface {
 
 // Creatable Ressource
 type CreateRessource interface {
-	Create(c *gapi.Ctx, db *database.DB) (*database.DB, error)
+	Create(c *Ctx, db *database.DB) (*database.DB, error)
 }
 
 // Retrievable Ressource
 type RetrieveRessource interface {
-	Retrieve(c *gapi.Ctx, db *database.DB) (*database.DB, error)
+	Retrieve(c *Ctx, db *database.DB) (*database.DB, error)
 }
 
 // Updatable Ressource
 type UpdateRessource interface {
-	Update(c *gapi.Ctx, db *database.DB) (*database.DB, error)
+	Update(c *Ctx, db *database.DB) (*database.DB, error)
 }
 
 // Deletable Ressource
 type DeleteRessource interface {
-	Delete(c *gapi.Ctx, db *database.DB) (*database.DB, error)
+	Delete(c *Ctx, db *database.DB) (*database.DB, error)
 }

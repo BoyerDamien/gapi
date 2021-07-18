@@ -1,15 +1,20 @@
-package gapi
+package main
 
 import (
 	"log"
 
+	"github.com/BoyerDamien/gapi/core"
 	"github.com/BoyerDamien/gapi/database/driver/sqlite"
 )
 
 func main() {
 
-	app := New(sqlite.Open("test.db"), Config{})
-	log.Fatal(app.Listen("3000"))
+	app := core.New(sqlite.Open("test.db"), core.Config{})
+
+	coll := app.Collection("/api/v1")
+	coll.AddRessources(&Tag{})
+	log.Fatal(app.Listen(":3000"))
+
 	/*if err := config.InitStaticFiles(); err != nil {
 		panic(err)
 	}

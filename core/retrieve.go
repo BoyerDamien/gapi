@@ -1,12 +1,11 @@
-package generics
+package core
 
 import (
-	"github.com/BoyerDamien/gapi/ressource"
+	"github.com/BoyerDamien/gapi/database"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
-func Retrieve(c *fiber.Ctx, db *gorm.DB, r ressource.RetrieveRessource) error {
+func Retrieve(c *Ctx, db *database.DB, r RetrieveRessource) error {
 
 	result, err := r.Retrieve(c, db)
 	if err != nil {

@@ -1,12 +1,11 @@
-package generics
+package core
 
 import (
-	"github.com/BoyerDamien/gapi/ressource"
+	"github.com/BoyerDamien/gapi/database"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
-func Delete(c *fiber.Ctx, db *gorm.DB, r ressource.DeleteRessource) error {
+func Delete(c *Ctx, db *database.DB, r DeleteRessource) error {
 
 	result, err := r.Delete(c, db)
 	if err != nil {

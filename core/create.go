@@ -1,18 +1,17 @@
-package generics
+package core
 
 import (
-	"github.com/BoyerDamien/gapi/ressource"
+	"github.com/BoyerDamien/gapi/database"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
-func Create(c *fiber.Ctx, db *gorm.DB, r ressource.CreateRessource) error {
+func Create(c *Ctx, db *database.DB, r CreateRessource) error {
 
 	if err := c.BodyParser(r); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err.Error()})
 	}
 
-	if err := ressource.Validate(r); err != nil {
+	if err := Validate(r); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err})
 	}
 
