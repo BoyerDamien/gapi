@@ -98,7 +98,7 @@ func (s *Router) AddRessources(ressources ...interface{}) {
 		valCopy := val
 
 		if s.hasMethod(val, "Retrieve") {
-			log.Printf("Add endpoint GET %s", uri)
+			log.Printf("Add endpoint GET %s:id", uri)
 			s.Get(fmt.Sprintf("%s/:id", ressourceName), func(c *Ctx) error {
 				return retrieve(c, s.db, valCopy.(RetrieveRessource))
 			})
@@ -111,7 +111,7 @@ func (s *Router) AddRessources(ressources ...interface{}) {
 		}
 
 		if s.hasMethod(val, "Delete") {
-			log.Printf("Add endpoint DELETE %s", uri)
+			log.Printf("Add endpoint DELETE %s:id", uri)
 			s.Delete(fmt.Sprintf("%s/:id", ressourceName), func(c *Ctx) error {
 				return delete(c, s.db, valCopy.(DeleteRessource))
 			})
