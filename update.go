@@ -16,7 +16,7 @@ func update(c *Ctx, db *database.DB, r UpdateRessource) error {
 
 	result, err := r.Update(c, db)
 	if err != nil {
-		return c.SendStatus(fiber.StatusInternalServerError)
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err})
 	}
 	if result.Error != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": result.Error.Error()})
