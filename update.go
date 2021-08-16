@@ -10,6 +10,9 @@ func update(c *Ctx, db *database.DB, r UpdateRessource) error {
 	if err := c.BodyParser(r); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err.Error()})
 	}
+	if err := Validate(r); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": err})
+	}
 
 	result, err := r.Update(c, db)
 	if err != nil {

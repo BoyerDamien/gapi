@@ -1,10 +1,6 @@
 package gapi
 
-import (
-	"fmt"
-
-	"github.com/go-playground/validator"
-)
+import "github.com/go-playground/validator"
 
 // ValidationErr est le modèle de réponse en cas d'érreur de validation du model
 type ValidationErr struct {
@@ -13,7 +9,7 @@ type ValidationErr struct {
 	Value       string
 }
 
-func Validate(model interface{}) error {
+func Validate(model interface{}) []*ValidationErr {
 	var errors []*ValidationErr
 	validate := validator.New()
 	err := validate.Struct(model)
@@ -26,5 +22,5 @@ func Validate(model interface{}) error {
 			errors = append(errors, &element)
 		}
 	}
-	return fmt.Errorf("%v", errors)
+	return errors
 }
