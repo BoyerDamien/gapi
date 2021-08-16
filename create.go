@@ -11,10 +11,6 @@ func create(c *Ctx, db *database.DB, r CreateRessource) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err.Error()})
 	}
 
-	if err := Validate(r); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err})
-	}
-
 	result, err := r.Create(c, db)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"Message": err})
