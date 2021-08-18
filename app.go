@@ -24,7 +24,7 @@ type App struct {
 	// Fiber app content
 	*fiber.App
 	// Gorm db content
-	db *database.DB
+	DB *database.DB
 }
 
 // Collection allows to group handlers behind one endpoints.
@@ -33,7 +33,7 @@ type App struct {
 func (s *App) Collection(endpoint string, handlers ...func(*Ctx) error) Router {
 	return Router{
 		s.Group(endpoint, handlers...),
-		s.db,
+		s.DB,
 		endpoint,
 	}
 }
@@ -60,14 +60,14 @@ func (s *App) StaticFolders(paths ...string) {
 // Router denotes Gapi router
 type Router struct {
 	fiber.Router
-	db   *database.DB
+	DB   *database.DB
 	base string
 }
 
 // Proceed to the ressource migration to the database
 func (s *Router) migrateRessource(ressource interface{}) {
 	log.Printf("%s migration in progress...\n", fmt.Sprintf("%T", ressource))
-	if err := s.db.AutoMigrate(ressource); err != nil {
+	if err := s.DB.AutoMigrate(ressource); err != nil {
 		panic(err)
 	}
 }
@@ -100,41 +100,41 @@ func (s *Router) AddRessources(ressources ...interface{}) {
 		if s.hasMethod(val, "Retrieve") {
 			log.Printf("Add endpoint GET %s:id", uri)
 			s.Get(fmt.Sprintf("%s/:id", ressourceName), func(c *Ctx) error {
-				return retrieve(c, s.db, valCopy.(RetrieveRessource))
+				return retrieve(c, s.DB, valCopy.(RetrieveRessource))
 			})
 		}
 		if s.hasMethod(val, "Create") {
 			log.Printf("Add endpoint POST %s", uri)
 			s.Post(ressourceName, func(c *Ctx) error {
-				return create(c, s.db, valCopy.(CreateRessource))
+				return create(c, s.DB, valCopy.(CreateRessource))
 			})
 		}
 
 		if s.hasMethod(val, "Delete") {
 			log.Printf("Add endpoint DELETE %s:id", uri)
 			s.Delete(fmt.Sprintf("%s/:id", ressourceName), func(c *Ctx) error {
-				return delete(c, s.db, valCopy.(DeleteRessource))
+				return delete(c, s.DB, valCopy.(DeleteRessource))
 			})
 		}
 
 		if s.hasMethod(val, "Update") {
 			log.Printf("Add endpoint PUT %s", uri)
 			s.Put(ressourceName, func(c *Ctx) error {
-				return update(c, s.db, valCopy.(UpdateRessource))
+				return update(c, s.DB, valCopy.(UpdateRessource))
 			})
 		}
 
 		if s.hasMethod(val, "ListQuery") {
 			log.Printf("Add endpoint GET %ss", uri)
 			s.Get(fmt.Sprintf("%ss", ressourceName), func(c *Ctx) error {
-				return list(c, s.db, valCopy.(ListRessource))
+				return list(c, s.DB, valCopy.(ListRessource))
 			})
 		}
 
 		if s.hasMethod(val, "DeleteListQuery") {
 			log.Printf("Add endpoint DELETE %ss", uri)
 			s.Delete(fmt.Sprintf("%ss", ressourceName), func(c *Ctx) error {
-				return deleteList(c, s.db, valCopy.(DeleteListRessource))
+				return deleteList(c, s.DB, valCopy.(DeleteListRessource))
 			})
 		}
 	}
